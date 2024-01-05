@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="114457300838-bd85glm8pd63f19ri1kivkqp2624cmcd.apps.googleusercontent.com">
+    <link rel="stylesheet" type="text/css" href="/static/signin.css"/>
+
+    <script src="app.js"></script>
+    <title>HH Scheduler</title>
+</head>
+<body>
+    <h1>Home Health Calender</h1>
+
+    <div id="g_id_onload"
+         data-client_id="114457300838-bd85glm8pd63f19ri1kivkqp2624c mcd.apps.googleusercontent.com"
+         data-login_uri="https://your.domain/your_login_endpoint"
+         data-auto_prompt="false">
+      </div>
+
+      <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-callback="OnSuccess"
+         data-logo_alignment="left">
+      </div>
+ 
+    <div class="g-signin2" data-onsuccess="onSignIn">Sign In
+    </div>
+    
+
+</body>
+</html>

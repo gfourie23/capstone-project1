@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/user.css">
+    <title>User Profile</title>
+</head>
+<body>
+    
+    <ul>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/pt-list">Patient List</a></li>
+        <li><a href="/add-pt">Add a Patient</a></li>
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+      </ul>
+
+      <h1>Weekly Availability</h1>
+
+
+    {% for user in users %}
+    <h1>{{ user.name }}</h1>
+    {% endfor %}
+
+    
+<div class="daily-availability">
+    <form method="POST" action="/user">
+        {{ form.hidden_tag() }}
+
+        {% for field in form 
+            if field.widget.input_type !='hidden' %}
+
+        <p>
+            {{ field.label }}
+            {{ field }}
+
+            {% for error in field.errors %}
+    {{ error }}
+  {% endfor %}
+</p>
+{% endfor %}
+
+ <!--<form method="POST" action="/user">
+       
+        {% for field in form %}
+            <label>{{ field.label }}</label>
+            {{ field }}
+            <br>
+        {% endfor %} -->
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+</body>
+</html> 
+
