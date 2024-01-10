@@ -39,10 +39,9 @@ app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
 app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
-"""GOOGLE_CLIENT_ID = app.config['GOOGLE_CLIENT_ID']
-GOOGLE_CLIENT_SECRET = app.config['GOOGLE_CLIENT_SECRET']"""
+
 OAUTH2_META_URL = ("https://accounts.google.com/.well-known/openid-configuration")
-"""SECRET_KEY = app.config['SECRET_KEY']"""
+
 
 #client = OpenAI()
 login_manager = LoginManager()
@@ -63,7 +62,7 @@ oauth.register("Scheduler",
                client_secret=app.config["GOOGLE_CLIENT_SECRET"],
                server_metadata_url=OAUTH2_META_URL,
                authorize_url='https://accounts.google.com/o/oauth2/auth',
-               redirect_uri='http://127.0.0.1:5000/calendar',
+               redirect_uri='https://schedule-app6.onrender.com/calendar',
                client_kwargs={
                    "scope": "openid profile email https://www.googleapis.com/auth/calendar.events"
                })
