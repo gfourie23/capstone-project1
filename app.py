@@ -62,7 +62,7 @@ oauth.register("Scheduler",
                client_secret=app.config["GOOGLE_CLIENT_SECRET"],
                server_metadata_url=OAUTH2_META_URL,
                authorize_url='https://accounts.google.com/o/oauth2/auth',
-               redirect_uri='https://schedule-app7.onrender.com/signin-google',
+               redirect_uri='https://schedule-app6.onrender.com/signin-google',
                client_kwargs={
                    "scope": "openid profile email https://www.googleapis.com/auth/calendar.events"
                })
