@@ -35,10 +35,14 @@ app.config['SQLALCHEMY_ECHO'] = True
 #app.config.from_pyfile('config.py')
 
 app.app_context().push()
-GOOGLE_CLIENT_ID = app.config['GOOGLE_CLIENT_ID']
+app.config['GOOGLE_CLIENT_ID'] = os.environ.get('GOOGLE_CLIENT_ID')
+app.config['GOOGLE_CLIENT_SECRET'] = os.environ.get('GOOGLE_CLIENT_SECRET')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+"""GOOGLE_CLIENT_ID = app.config['GOOGLE_CLIENT_ID']
 GOOGLE_CLIENT_SECRET = app.config['GOOGLE_CLIENT_SECRET']
 OAUTH2_META_URL = ("https://accounts.google.com/.well-known/openid-configuration")
-SECRET_KEY = app.config['SECRET_KEY']
+SECRET_KEY = app.config['SECRET_KEY']"""
 
 #client = OpenAI()
 login_manager = LoginManager()
