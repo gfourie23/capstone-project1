@@ -4,7 +4,7 @@ import os
 import requests
 import psycopg2
 
-from flask import Flask, redirect, render_template, session, url_for, request, flash, abort, jsonify
+from flask import Flask, redirect, render_template, session, url_for, request, flash, abort, jsonify, current_user
 #from flask_wtf import FlaskForm
 #from flask_debugtoolbar import DebugToolbarExtension
 #from flask_oauthlib.client import OAuth
@@ -93,7 +93,7 @@ def googleLogin():
 def googleCallback():
     token = oauth.Scheduler.authorize_access_token()
     session["user"] = token
-    return redirect ('/calendar')
+    return redirect('/calendar')
 
 @app.route("/logout")
 def logout():
@@ -103,6 +103,7 @@ def logout():
 
 
 @app.route('/calendar', methods=["GET"])
+@login_required
 def show_cal():
     """Show calendar."""
     return render_template('homepage.html')
@@ -110,12 +111,14 @@ def show_cal():
 
 
 @app.route('/pt-list', methods=["GET"])
+@login_required
 def show_pt_list():
     #Show the list of patients
     patients = Patient.query.all()
     return render_template('pt-list.html', patients=patients)
 
 @app.route('/add-pt', methods=["GET", "POST"])
+@login_required
 def add_pt_form():
     """Add new patient information to database."""
     form = NewPatientForm()
@@ -141,6 +144,7 @@ def add_pt_form():
     
 
 @app.route('/edit-pt/<int:patient_id>', methods=["GET", "POST"])
+@login_required
 def edit_pt_form(patient_id):
     """Edit existing patient information."""
     
@@ -170,6 +174,7 @@ def edit_pt_form(patient_id):
     
 
 @app.route('/pt-list/<int:patient_id>/delete', methods=["POST"])
+@login_required
 def delete_pt(patient_id):
     """Delete a patient from patient list."""
 
