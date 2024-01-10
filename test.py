@@ -46,7 +46,7 @@ class TestAddPatientFormRoute(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
-                app.config['WTF_CSRF_ENABLED'] = False 
+        app.config['WTF_CSRF_ENABLED'] = False 
         self.app = app.test_client()
         db.create_all()
 

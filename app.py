@@ -32,7 +32,7 @@ load_dotenv()
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config.from_pyfile('config.py')
+#app.config.from_pyfile('config.py')
 
 app.app_context().push()
 GOOGLE_CLIENT_ID = app.config['GOOGLE_CLIENT_ID']
