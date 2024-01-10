@@ -67,6 +67,11 @@ oauth.register("Scheduler",
                    "scope": "openid profile email https://www.googleapis.com/auth/calendar.events"
                })
 
+@app.route('/current_host')
+def get_current_host():
+    # Get the current host from the request object
+    current_host = request.host
+    return f'The current host is: {current_host}'
 
 @login_manager.user_loader
 def load_user(user_id):
