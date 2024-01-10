@@ -1,3 +1,5 @@
+
+import os 
 import unittest
 from flask import Flask, render_template
 from app import app, Patient, NewPatientForm, PatientEditForm, db
@@ -21,7 +23,7 @@ class TestPatientListRoute(unittest.TestCase):
 
     def setUp(self):
         app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///schedule_app'
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
         self.app = app.test_client()
         db.create_all()
 
@@ -43,8 +45,8 @@ class TestAddPatientFormRoute(unittest.TestCase):
 
     def setUp(self):
         app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///schedule_app'
-        app.config['WTF_CSRF_ENABLED'] = False 
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+                app.config['WTF_CSRF_ENABLED'] = False 
         self.app = app.test_client()
         db.create_all()
 
@@ -87,7 +89,7 @@ class TestEditPatientFormRoute(unittest.TestCase):
 
     def setUp(self):
         app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///schedule_app'
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
         app.config['WTF_CSRF_ENABLED'] = False 
         self.app = app.test_client()
         db.create_all()
@@ -145,7 +147,8 @@ class TestDeletePatientRoute(unittest.TestCase):
 
      def setUp(self):
         app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///schedule_app'
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+
         app.config['WTF_CSRF_ENABLED'] = False 
         self.app = app.test_client()
         db.create_all()

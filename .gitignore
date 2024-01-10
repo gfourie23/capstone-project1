@@ -2,4 +2,6 @@ config.py
 .env
 client_secret.json 
 __pycache__/ 
-token.json   
+token.json  
+venv/ 
+.DS_Store
