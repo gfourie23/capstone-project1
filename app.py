@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 
 from models import db, connect_db, Patient, User
@@ -21,6 +22,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 AUTH_URL = 'https://accounts.google.com/o/oauth2/auth'
+CORS(app)
 
 
 
