@@ -28,14 +28,6 @@ class Patient(db.Model):
         db.Text,
         nullable=False
     )
-    email = db.Column(
-        db.Text,
-        nullable=True
-    )
-    phone_number = db.Column(
-        db.Text,
-        nullable=True
-    )
     frequency = db.Column(
         db.Integer,
         nullable=False
