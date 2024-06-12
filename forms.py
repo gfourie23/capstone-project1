@@ -12,9 +12,9 @@ class NewPatientForm(FlaskForm):
 
     city = StringField('City', validators=[DataRequired()])
 
-    email = StringField('Email', validators=[DataRequired()])
+    email = StringField('Email')
 
-    phone_number = StringField('Phone Number', validators=[DataRequired()])
+    phone_number = StringField('Phone Number')
 
     frequency = StringField('Weekly Frequency', validators=[DataRequired()])
 
@@ -35,9 +35,9 @@ class PatientEditForm(FlaskForm):
 
     city = StringField('City', validators=[DataRequired()])
 
-    email = StringField('Email', validators=[DataRequired()])
+    email = StringField('Email')
 
-    phone_number = StringField('Phone Number', validators=[DataRequired()])
+    phone_number = StringField('Phone Number')
 
     frequency = StringField('Weekly Frequency', validators=[DataRequired()])
 
