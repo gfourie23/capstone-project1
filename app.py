@@ -8,8 +8,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
-#from flask_cors import CORS
-
 
 from models import db, connect_db, Patient, User
 from forms import NewPatientForm, PatientEditForm
@@ -22,9 +20,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 AUTH_URL = 'https://accounts.google.com/o/oauth2/auth'
-#CORS(app)
-
-
 
 app.app_context().push()
 connect_db(app)
@@ -56,6 +51,7 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
+    """Display sign-in page."""
     return render_template('signin.html', session=session.get("user"), pretty=json.dumps(session.get("user"), indent=4))
 
 def generate_nonce(length=16):
@@ -65,6 +61,7 @@ def generate_nonce(length=16):
 
 @app.route('/google-login')
 def google_login():
+    """Initiate Google OAuth login."""
     nonce = generate_nonce()
     session['nonce'] = nonce
     print(f"Generated nonce: {nonce}")
@@ -73,15 +70,15 @@ def google_login():
 
 @app.route('/signin-google')
 def google_callback():
+    """Handles OAuth callback and user login."""
     token = oauth.google.authorize_access_token()
-    print(f"Token received: {token}")
     nonce = session.pop('nonce', None)
-    print(f"Nonce from session: {nonce}") 
+    
     if nonce is None:
         return 'Missing nonce in session', 400
     user_info = oauth.google.parse_id_token(token, nonce=nonce)
     session['user'] = user_info
-    print(f"User info: {user_info}")
+   
     # Logic to handle user login or registration
     user = User.query.filter_by(email=user_info['email']).first()
     if user is None:
@@ -94,33 +91,31 @@ def google_callback():
     login_user(user)
     return redirect('/calendar')
 
-
-
-
 @app.route('/logout')
 def logout():
+    """Logs out the current user."""
     session.pop('user', None)
     logout_user()
     return redirect(url_for('home'))
-  
 
 
-
-
-@app.route('/calendar')
+@app.route('/calendar', methods=["GET"])
 @login_required
 def show_cal():
+    """Display the calendar. Protected route."""
     return render_template('homepage.html')
 
-@app.route('/pt-list')
+@app.route('/pt-list', methods=["GET"])
 @login_required
 def show_pt_list():
+    """Displays the list of patients. Protected route."""
     patients = Patient.query.all()
     return render_template('pt-list.html', patients=patients)
 
 @app.route('/add-pt', methods=["GET", "POST"])
 @login_required
 def add_pt_form():
+    """Handles adding a new patient. Protected route."""
     form = NewPatientForm()
     if form.validate_on_submit():
         new_patient = Patient(
@@ -139,6 +134,7 @@ def add_pt_form():
 @app.route('/edit-pt/<int:patient_id>', methods=["GET", "POST"])
 @login_required
 def edit_pt_form(patient_id):
+    """Handles editing a specific patient. Protected route."""
     patient = Patient.query.get(patient_id)
     if not patient:
         abort(404)
@@ -149,9 +145,10 @@ def edit_pt_form(patient_id):
         return redirect("/pt-list")
     return render_template("edit-pt.html", form=form, patient=patient)
 
-@app.route('/pt-list/<int:patient_id>/delete', methods=["POST"])
+@app.route('/pt-list/<int:patient_id>/delete', methods=["DELETE"])
 @login_required
 def delete_pt(patient_id):
+    """Handles deleting a specific patient. Protected route."""
     patient = Patient.query.get(patient_id)
     if not patient:
         abort(404)
