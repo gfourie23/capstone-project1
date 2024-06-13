@@ -24,7 +24,7 @@ Before running the application, ensure you have the following installed:
 
 - Python 3.x
 - Pip (Python package installer)
-- SQLite or PostgreSQL (or another compatible database)
+- PostgreSQL
 
 ## Getting Started
 
@@ -48,6 +48,7 @@ Before running the application, ensure you have the following installed:
     SECRET_KEY=your_secret_key
     GOOGLE_CLIENT_ID=your_google_client_id
     GOOGLE_CLIENT_SECRET=your_google_client_secret
+    
 
     Replace your_database_name.db with your desired PostgreSQL database name.
 
@@ -60,6 +61,7 @@ Before running the application, ensure you have the following installed:
 
     ```bash
     flask run
+
 
     Access the application in your web browser at http://localhost:5000.
 
