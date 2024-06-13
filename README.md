@@ -50,7 +50,7 @@ Before running the application, ensure you have the following installed:
     GOOGLE_CLIENT_SECRET=your_google_client_secret
     
 
-    Replace your_database_name.db with your desired PostgreSQL database name.
+   Replace your_database_name.db with your desired PostgreSQL database name.
 
 4. **Initialize the database**:
 
